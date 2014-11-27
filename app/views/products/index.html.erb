@@ -1,0 +1,33 @@
+<h1>Listing products</h1>
+
+<form action="<%= url_for(:action => 'index') %>">
+	<%= label_tag :keyword, t(:Keyword) %>
+    <%= text_field_tag :keyword, @keyword  %>
+	<%= submit_tag t(:Search), :class => 'button' %>
+</form>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @products.each do |product| %>
+  <tr>
+    <td><%= product.title %></td>
+    <td><%= product.description %></td>
+    <td><%= product.price %></td>
+    <td><%= link_to 'Show', product %></td>
+    <td><%= link_to 'Edit', edit_product_path(product) %></td>
+    <td><%= link_to 'Destroy', product, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Product', new_product_path %>
